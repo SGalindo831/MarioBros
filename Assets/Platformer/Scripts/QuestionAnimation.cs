@@ -6,7 +6,7 @@ public class QuestionBlockAnimator : MonoBehaviour
     private Material blockMaterial;
     private int currentFrame = 0;
     private float timer = 0f;
-    private readonly int totalFrames = 5;
+    private int totalFrames = 5;
 
     void Start()
     {

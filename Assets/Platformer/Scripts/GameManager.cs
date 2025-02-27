@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+
 public class NewMonoBehaviourScript : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
@@ -12,7 +13,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int timeLeft = 300 - (int)(Time.time);
+        int timeLeft = 100 - (int)(Time.time);
+
+        // Check if time has run out
+        if (timeLeft <= 0)
+        {
+            timeLeft = 0;
+            HandleTimeRunOut();
+        }
+
         timerText.text = $"Time: {timeLeft}";
 
         if (Input.GetMouseButtonDown(0))
@@ -35,10 +44,34 @@ public class NewMonoBehaviourScript : MonoBehaviour
                     score += 150;
                 }
 
-                coinText.text = $"{coins}";
-                scoreText.text = $"{score}";
+                UpdateUI();
             }
         }
+    }
+    public void AddCoin()
+    {
+        coins += 1;
+        UpdateUI();
+    }
 
+    public void AddScore(int points)
+    {
+        score += points;
+        UpdateUI();
+    }
+    private void UpdateUI()
+    {
+        coinText.text = $"{coins}";
+        scoreText.text = $"{score}";
+    }
+    private bool timeRunOut = false;
+    private void HandleTimeRunOut()
+    {
+        if (timeRunOut)
+            return;
+
+        timeRunOut = true;
+
+        Debug.LogWarning("GAME OVER: Player didn't complete the level in time.");
     }
 }

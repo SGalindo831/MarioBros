@@ -38,6 +38,8 @@ public class LevelParser : MonoBehaviour
     public GameObject brickPrefab;
     public GameObject questionBoxPrefab;
     public GameObject stonePrefab;
+    public GameObject waterPrefab;
+    public GameObject goalPrefab;
     // --------------------------------------------------------------------------
     void Start()
     {
@@ -107,6 +109,20 @@ public class LevelParser : MonoBehaviour
                 {
                     Vector3 pos = new Vector3(col + 0.5f, row + 0.5f, 0f);
                     GameObject newObj = Instantiate(questionBoxPrefab, environmentRoot);
+                    newObj.transform.position = pos;
+                }
+
+                if (letters[col] == 'w')
+                {
+                    Vector3 pos = new Vector3(col + 0.5f, row + 0.5f, 0f);
+                    GameObject newObj = Instantiate(waterPrefab, environmentRoot);
+                    newObj.transform.position = pos;
+                }
+
+                if (letters[col] == 'g')
+                {
+                    Vector3 pos = new Vector3(col + 0.5f, row + 0.5f, 0f);
+                    GameObject newObj = Instantiate(goalPrefab, environmentRoot);
                     newObj.transform.position = pos;
                 }
 
